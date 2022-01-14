@@ -14,3 +14,14 @@ function fun2(x = w + 1, y = x + 1, z = z+1){
      //Uncaught ReferenceError: Cannot access 'z' before initialization
 }
 fun2()
+
+function myfunc({x=10}={}, {y}={y:10}){
+    console.log(x,y);
+}
+
+myfunc() // 10, 10
+myfunc({},{}) // 10, undefined
+myfunc({x=3},{}) // 3，undefined
+myfunc({x=3},{y=6}) // 3，6
+myfunc(undefined,undefined) // 10，undefined
+myfunc(undefined,{}) // 10，undefined
