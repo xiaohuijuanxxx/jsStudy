@@ -1,0 +1,1 @@
+// a instanceof b 判断a是否在b的原型链上
