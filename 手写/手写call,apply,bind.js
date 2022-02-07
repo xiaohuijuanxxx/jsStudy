@@ -3,16 +3,19 @@ Function.prototype.mycall = function (context) {
     var context = context || window;
     context.fn = this;
 
-    var args = [];
-    for(var i = 1, len = arguments.length; i < len; i++) {
-        args.push('arguments[' + i + ']');
-    }
+    // var args = [];
+    // for(var i = 1, len = arguments.length; i < len; i++) {
+    //     args.push('arguments[' + i + ']');
+    // }
+    let arg = [...arguments].slice(1);
 
-    var result = eval('context.fn(' + args +')');
+    var result = context.fn(arg)
 
     delete context.fn
     return result;
 }
+// foo.mycall(obj) 调用
+
 //apply
 Function.prototype.myapply = function (context, arr) {
     var context = Object(context) || window;
@@ -23,16 +26,21 @@ Function.prototype.myapply = function (context, arr) {
         result = context.fn();
     }
     else {
-        var args = [];
-        for (var i = 0, len = arr.length; i < len; i++) {
-            args.push('arr[' + i + ']');
-        }
-        result = eval('context.fn(' + args + ')')
+        let arg = [...arguments].slice(1);
+        // var args = [];
+        // for (var i = 0, len = arr.length; i < len; i++) {
+        //     args.push('arr[' + i + ']');
+        // }
+        result =  context.fn(arg)
+        // result = eval('context.fn(' + args + ')')
     }
 
     delete context.fn
     return result;
 }
+
+// foo.myapply(obj,[1,2,3]) 调用
+
 //bind
 /**
  * 改变this指向
